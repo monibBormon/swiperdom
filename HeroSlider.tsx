@@ -1,27 +1,27 @@
-import Image from "next/image";
-import Link from "next/link";
-import { MutableRefObject, useCallback, useRef, useState } from "react";
-import { Autoplay, Controller, Navigation } from "swiper";
-import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/navigation";
+import Image from 'next/image';
+import Link from 'next/link';
+import { MutableRefObject, useCallback, useRef, useState } from 'react';
+import { Autoplay, Controller, Navigation } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
 
-import useSliderAutoplay from "@hooks/useSliderAutoplay";
-import useWindowDimensions from "@hooks/useWindowDimensions";
-import { useHeroSliderInit } from "@state/index";
-import React, { useEffect } from "react";
-import { HeroSliderProps } from "src/types";
-import { Swiper, SwiperSlide } from "swiper/react";
-import ArrowNav from "./ArrowNav";
-import DownSliderWrapper from "./DownSliderWrapper";
-import MobileDownSlider from "./MobileDownSlider";
-import NumberSlider from "./NumberSlider";
-import SmallerImageSlider from "./SmallerImageSlider";
-import TextSlider from "./TextSlider";
-import { homeSliderData } from "src/constant/slider";
-import LazyLoad from "react-lazy-load";
+import useSliderAutoplay from '@hooks/useSliderAutoplay';
+import useWindowDimensions from '@hooks/useWindowDimensions';
+import { useHeroSliderInit } from '@state/index';
+import React from 'react';
+import LazyLoad from 'react-lazy-load';
+import { homeSliderData } from 'src/constant/slider';
+import { HeroSliderProps } from 'src/types';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import ArrowNav from './ArrowNav';
+import DownSliderWrapper from './DownSliderWrapper';
+import MobileDownSlider from './MobileDownSlider';
+import NumberSlider from './NumberSlider';
+import SmallerImageSlider from './SmallerImageSlider';
+import TextSlider from './TextSlider';
 
-const MultipleSwiperSliderSync = ({}: HeroSliderProps) => {
+const HeroSlider = ({}: HeroSliderProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const [controlledSwiper, setControlledSwiper] =
@@ -55,7 +55,7 @@ const MultipleSwiperSliderSync = ({}: HeroSliderProps) => {
   }, []);
 
   const navigationNextElement = useRef<MutableRefObject<any>>(null);
-       
+
   // Jotai State
   const [heroSliderInit, setHeroSliderInit] = useHeroSliderInit();
 
@@ -66,17 +66,6 @@ const MultipleSwiperSliderSync = ({}: HeroSliderProps) => {
     controlledSwiper4 &&
     controlledSwiper5;
 
-  const [counter, setCounter] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCounter((prev) => (prev += 1));
-    }, 10);
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
   return (
     <div className="h-[100svh]">
       <div
@@ -85,19 +74,19 @@ const MultipleSwiperSliderSync = ({}: HeroSliderProps) => {
           if (width >= 1024) {
             pauseAutoplay();
             // sliderRef.current.swiper.autoplay.pause();
-            progressRef.current.style.animationPlayState = "paused";
-            mobileProgressRef.current.style.animationPlayState = "paused";
+            progressRef.current.style.animationPlayState = 'paused';
+            mobileProgressRef.current.style.animationPlayState = 'paused';
           }
         }}
         onMouseLeave={() => {
           if (width >= 1024) {
             // sliderRef.current.swiper.autoplay.run();
             resumeAutoplay();
-            progressRef.current.style.animationPlayState = "running";
-            mobileProgressRef.current.style.animationPlayState = "running";
+            progressRef.current.style.animationPlayState = 'running';
+            mobileProgressRef.current.style.animationPlayState = 'running';
           }
-        }}
-      > 
+        }} 
+      >
         <div className="h-full w-full absolute right-0 top-0 heroControllerSlider rotate-180 !bg-[#000000]">
           <div className="w-full h-full -rotate-180">
             <Swiper
@@ -114,7 +103,7 @@ const MultipleSwiperSliderSync = ({}: HeroSliderProps) => {
                         controlledSwiper4,
                         controlledSwiper5,
                       ],
-                      by: "container",
+                      by: 'container',
                     }
                   : undefined
               }
@@ -129,7 +118,7 @@ const MultipleSwiperSliderSync = ({}: HeroSliderProps) => {
               autoplay={false}
               className="w-full h-full mySwiper2"
               onInit={(swiper: any) => {
-                swiper.params.navigation.nextEl = "#smallImageSlider";
+                swiper.params.navigation.nextEl = '#smallImageSlider';
                 swiper.navigation.init();
                 swiper.navigation.update();
                 setHeroSliderInit(true);
@@ -139,32 +128,32 @@ const MultipleSwiperSliderSync = ({}: HeroSliderProps) => {
                 // @ts-ignore
                 setActiveIndex(sliderRef?.current?.swiper?.activeIndex);
                 document
-                  .getElementById("_heroDownSliderProgressBar")
-                  ?.classList.remove("_heroDownSliderProgressBarAnimation");
+                  .getElementById('_heroDownSliderProgressBar')
+                  ?.classList.remove('_heroDownSliderProgressBarAnimation');
                 document
-                  .getElementById("_heroDownSliderProgressBar2")
-                  ?.classList.remove("_heroDownSliderProgressBarAnimation");
+                  .getElementById('_heroDownSliderProgressBar2')
+                  ?.classList.remove('_heroDownSliderProgressBarAnimation');
                 setTimeout(() => {
                   document
-                    .getElementById("_heroDownSliderProgressBar")
-                    ?.classList.add("_heroDownSliderProgressBarAnimation");
+                    .getElementById('_heroDownSliderProgressBar')
+                    ?.classList.add('_heroDownSliderProgressBarAnimation');
                 }, 1);
                 setTimeout(() => {
                   document
-                    .getElementById("_heroDownSliderProgressBar2")
-                    ?.classList.add("_heroDownSliderProgressBarAnimation");
+                    .getElementById('_heroDownSliderProgressBar2')
+                    ?.classList.add('_heroDownSliderProgressBarAnimation');
                 }, 1);
 
-                window.addEventListener("blur", () => {
+                window.addEventListener('blur', () => {
                   document
-                    .getElementById("_heroDownSliderProgressBar")
-                    ?.classList.remove("_heroDownSliderProgressBarAnimation");
+                    .getElementById('_heroDownSliderProgressBar')
+                    ?.classList.remove('_heroDownSliderProgressBarAnimation');
                 });
-                window.addEventListener("focus", () => {
+                window.addEventListener('focus', () => {
                   setTimeout(() => {
                     document
-                      .getElementById("_heroDownSliderProgressBar")
-                      ?.classList.add("_heroDownSliderProgressBarAnimation");
+                      .getElementById('_heroDownSliderProgressBar')
+                      ?.classList.add('_heroDownSliderProgressBarAnimation');
                   }, 1);
                 });
               }}
@@ -172,7 +161,7 @@ const MultipleSwiperSliderSync = ({}: HeroSliderProps) => {
               {homeSliderData.map(
                 ({ imageUrl, linkUrl, imageTitle, videoSrc, id }, i) => {
                   return (
-                    <SwiperSlide key={"dhasjd_" + i}>
+                    <SwiperSlide key={'dhasjd_' + i}>
                       <Link href={linkUrl} passHref prefetch={false}>
                         <a
                           href="#"
@@ -223,7 +212,7 @@ const MultipleSwiperSliderSync = ({}: HeroSliderProps) => {
                   );
                 }
               )}
-            </Swiper>        
+            </Swiper>
             <TextSlider setControlledSwiper3={setControlledSwiper3} />
           </div>
         </div>
@@ -252,4 +241,4 @@ const MultipleSwiperSliderSync = ({}: HeroSliderProps) => {
   );
 };
 
-export default MultipleSwiperSliderSync;
+export default HeroSlider;
